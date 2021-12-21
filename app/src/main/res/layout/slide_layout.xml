@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/slide_image"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:src="@drawable/gambar_1"/>
+
+        <TextView
+            android:id="@+id/slide_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/comicbd"
+            android:text="@string/str_header_slide_1"
+            android:textSize="25sp"
+            android:textColor="@color/black_blue"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/slide_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/comici"
+            android:text="@string/str_text_slide_1"
+            android:textAlignment="center"
+            android:textColor="@color/light_blue"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/stalls_data_cardview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@color/orange">
+
+            <TextView
+                android:id="@+id/tv_title_popup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:fontFamily="@font/comicbd"
+                android:text="@string/str_alert_fail"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_baseline_warning_24"/>
+
+                <TextView
+                    android:id="@+id/msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/comic"
+                    android:text=""
+                    android:textColor="@color/black_blue"
+                    android:textSize="17sp"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/btn_batal"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="2"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/comic"
+                android:text="@string/str_btn_batal"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="15dp"
+                android:backgroundTint="@color/orange"
+                app:rippleColor="@color/cloud_blue"
+                app:strokeWidth="2dp"/>
+
+
+            <Button
+                android:id="@+id/btn_okey"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="2"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/comic"
+                android:text="@string/str_btn_okey"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="15dp"
+                android:backgroundTint="@color/orange"
+                app:rippleColor="@color/cloud_blue"
+                app:strokeWidth="2dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

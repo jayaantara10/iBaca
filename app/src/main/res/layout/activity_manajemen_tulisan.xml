@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManajemenTulisanActivity"
+    android:background="@color/cloud_blue">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/comicbd"
+                android:text="@string/str_title_data_tulisan"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"/>
+
+            <androidx.cardview.widget.CardView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="30dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edt_judul_tulisan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:background="@null"
+                            android:drawableStart="@drawable/ic_baseline_title_24"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/comic"
+                            android:hint="@string/str_hint_judul_tulisan"
+                            android:inputType="textPersonName"
+                            android:nextFocusDown="@+id/spnr_jenis"
+                            android:selectAllOnFocus="true"
+                            android:textColorHint="@color/gray"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginVertical="15dp"
+                            android:layout_marginHorizontal="15dp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_menu_book_24"/>
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/spnr_jenis"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/comic"
+                                android:nextFocusDown="@+id/edt_penulis"
+                                android:selectAllOnFocus="true"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edt_penulis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:background="@null"
+                            android:drawableStart="@drawable/ic_baseline_person_24"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/comic"
+                            android:hint="@string/str_hint_penulis"
+                            android:inputType="textPersonName"
+                            android:nextFocusDown="@id/edt_link"
+                            android:selectAllOnFocus="true"
+                            android:textColorHint="@color/gray"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:orientation="horizontal"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edt_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="15dp"
+                            android:background="@null"
+                            android:drawableStart="@drawable/ic_baseline_link_24"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/comic"
+                            android:hint="@string/str_hint_tanggal"
+                            android:inputType="date"
+                            android:nextFocusDown="@id/edt_deskripsi"
+                            android:selectAllOnFocus="true"
+                            android:textColorHint="@color/gray"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_prev"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/comici"
+                        android:text="@string/str_pref"
+                        android:textColorHint="@color/ocean_blue"
+                        android:textAlignment="viewStart"
+                        android:backgroundTint="@color/ocean_blue"
+                        android:textColor="@color/orange"
+                        android:textSize="14sp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginVertical="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edt_deskripsi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_margin="15dp"
+                            android:background="@null"
+                            android:drawableStart="@drawable/ic_baseline_description_24"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/comic"
+                            android:hint="@string/str_hint_deskripsi"
+                            android:inputType="textMultiLine"
+                            android:nextFocusDown="@id/rb_group_status"
+                            android:selectAllOnFocus="true"
+                            android:textColorHint="@color/gray"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/comicbd"
+                        android:text="@string/str_status_paten"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/ocean_blue"
+                        android:textSize="18sp"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rb_group_status"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:id="@+id/rb_ada"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/ocean_blue"
+                            android:fontFamily="@font/comic"
+                            android:text="@string/str_status_ada"
+                            android:checked="false"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:id="@+id/rb_tidak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:buttonTint="@color/ocean_blue"
+                            android:fontFamily="@font/comic"
+                            android:text="@string/str_status_tidak"
+                            android:checked="false"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="13">
+
+                        <TextView
+                            android:layout_weight="9"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comicbd"
+                            android:text="@string/str_batasan_umur"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/ocean_blue"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_datasan_umur"
+                            android:layout_weight="2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comicbd"
+                            android:hint="1"
+                            android:textColorHint="@color/ocean_blue"
+                            android:textAlignment="center"
+                            android:backgroundTint="@color/ocean_blue"
+                            android:inputType="numberSigned"
+                            android:textColor="@color/ocean_blue"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <SeekBar
+                        android:id="@+id/sb_batasan_umur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/ocean_blue"
+                        android:progressTint="@color/black_blue"
+                        android:min="1"
+                        android:max="21"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="20dp"
+                        android:orientation="horizontal">
+                        <CheckBox
+                            android:id="@+id/cb_tanda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/ocean_blue" />
+
+                        <TextView
+                            android:id="@+id/tv_syarat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/comicbd"
+                            android:text="@string/str_syarat"
+                            android:textColorHint="@color/ocean_blue"
+                            android:textAlignment="center"
+                            android:backgroundTint="@color/ocean_blue"
+                            android:inputType="numberSigned"
+                            android:textColor="@color/orange"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/btn_batal"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="0dp"
+                            android:layout_height="55dp"
+                            android:layout_weight="2"
+                            android:layout_margin="15dp"
+                            android:fontFamily="@font/comic"
+                            android:text="@string/str_btn_batal"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:cornerRadius="15dp"
+                            android:backgroundTint="@color/orange"
+                            app:rippleColor="@color/cloud_blue"
+                            app:strokeWidth="2dp"/>
+
+                        <Button
+                            android:id="@+id/btn_okey"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="0dp"
+                            android:layout_height="55dp"
+                            android:layout_weight="2"
+                            android:layout_margin="15dp"
+                            android:fontFamily="@font/comic"
+                            android:text="@string/str_btn_okey"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:cornerRadius="15dp"
+                            android:backgroundTint="@color/ocean_blue"
+                            app:rippleColor="@color/cloud_blue"
+                            app:strokeWidth="2dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

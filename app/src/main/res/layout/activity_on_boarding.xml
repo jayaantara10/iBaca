@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnBoardingActivity">
+
+    <ImageView
+        android:id="@+id/bg_atas"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/background_atas"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/bg_bawah"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:src="@drawable/background_bawah"
+        android:layout_alignParentBottom="true"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slide_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/dots_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_above="@+id/bg_bawah"
+        android:gravity="center">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_above="@+id/dots_layout">
+        <Button
+            android:id="@+id/btn_mulai"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:fontFamily="@font/comic"
+            android:text="@string/str_mulai"
+            android:textColor="@color/ocean_blue"
+            app:cornerRadius="15dp"
+            app:rippleColor="@color/cloud_blue"
+            app:strokeColor="@color/ocean_blue"
+            app:strokeWidth="2dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

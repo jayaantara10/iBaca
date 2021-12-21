@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">iBaca</string>
+    <string name="api_server">http://192.168.1.100:8000/api/</string>
+
+    <string name="str_header_slide_1">Share Study Material</string>
+    <string name="str_header_slide_2">iBaca</string>
+    <string name="str_header_slide_3">iBaca</string>
+    <string name="str_text_slide_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="str_text_slide_2">Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="str_text_slide_3">Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="str_mulai">Lets Start</string>
+    <string name="str_title_login">LOGIN.</string>
+    <string name="str_title_username">Username</string>
+    <string name="str_hint_username">Username</string>
+    <string name="str_title_password">Password</string>
+    <string name="str_hint_password">Password</string>
+    <string name="str_btn_login">Login</string>
+    <string name="str_kalimat_register">you dont have account?</string>
+    <string name="str_register">register here</string>
+    <string name="str_forgot_password">Forgot password?</string>
+    <string name="str_welcome">Welcome dude,</string>
+    <string name="str_welcome_text">Here you can search for articles, essays, assignments, journals and other writings for additional knowledge or inspiration for your assignments.</string>
+    <string name="str_hint_search">Find study materials here!!!</string>
+    <string name="str_datafragmen">Lets writing,</string>
+    <string name="str_datafragmen_text">Here you can upload your writing also to help people who need inspiration in writing or doing tasks.</string>
+    <string name="str_hint_search2">Find your writing here!!!</string>
+    <string name="str_title_data_tulisan">Paper Data</string>
+    <string-array name="jenis_array">
+        <item>All</item>
+        <item>Journal</item>
+        <item>Paper</item>
+        <item>Art</item>
+        <item>Scientific Writings</item>
+        <item>Thesis</item>
+        <item>Report</item>
+        <item>Essay</item>
+    </string-array>
+    <string-array name="edit_jenis_array">
+        <item>Pilih Jenis Tulisan</item>
+        <item>Journal</item>
+        <item>Paper</item>
+        <item>Art</item>
+        <item>Scientific Writings</item>
+        <item>Thesis</item>
+        <item>Report</item>
+        <item>Essay</item>
+    </string-array>
+    <string name="str_btn_edit">EDIT</string>
+    <string name="str_btn_kembali">BACK</string>
+    <string name="str_data_user">User Data</string>
+    <string name="str_edit_user">Edit User</string>
+    <string name="str_btn_simpan">Save</string>
+    <string name="str_btn_regist">Regist</string>
+    <string name="str_btn_download">Download</string>
+    <string name="str_btn_logout">Logout</string>
+    <string name="str_btn_hapus">Delete</string>
+    <string name="str_btn_batal">Cancel</string>
+    <string name="str_btn_okey">Okey</string>
+    <string name="str_hint_judul_tulisan">Title</string>
+    <string name="str_hint_penulis">Writer Name</string>
+    <string name="str_hint_tanggal">Writing Date</string>
+    <string name="str_hint_deskripsi">Descirption</string>
+    <string name="str_hint_deskripsi1">Description</string>
+    <string name="str_status_paten">Licensed</string>
+    <string name="str_status_ada">Licensed</string>
+    <string name="str_status_tidak">Unlicensed</string>
+    <string name="str_batasan_umur">Age Restriction</string>
+    <string name="str_syarat">Agree to terms and condition</string>
+    <string name="str_link">List the Google Drive link here</string>
+    <string name="str_link_title">Link Download</string>
+    <string name="str_pref">*upload the file first on the drive then include the sharing link here</string>
+    <string name="str_hint_data_email">Email</string>
+    <string name="str_hint_data_name">User Name</string>
+    <string name="str_hint_data_password">Password</string>
+    <string name="str_hint_con_password">Confirmation Password</string>
+    <string name="str_title_jenis">Type</string>
+    <string name="str_paten">Licensed</string>
+    <string name="str_alert_fail">Action Fail</string>
+    <string name="str_alert_success_user">Registration Successfully</string>
+    <string name="str_alert_success_user2">Update Data Successfully</string>
+    <string name="str_change_pass">Change Password</string>
+    <string name="str_change_pass_success">Change Password Successfully</string>
+    <string name="str_old_pass">Old Password</string>
+    <string name="str_new_pass">New Password</string>
+
+    <string name="str_delet_user">Delete User</string>
+    <string name="str_delet_user_response">"Are you sure to delete this user?"</string>
+    <string name="str_delet_item">Delete Paper</string>
+    <string name="str_delet_item_response">"Are you sure to delete this paper?"</string>
+    <string name="str_success">Action Successfully</string>
+    <string name="str_success_response">"Your action has been excuted."</string>
+    <string name="str_logout">Logout</string>
+    <string name="str_logout_response">"You want to log out"</string>
+</resources>
