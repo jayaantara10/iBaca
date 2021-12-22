@@ -17,9 +17,12 @@ public interface ApiInterface {
     @POST("paper/store")
     Call<PostResponseModel>createDataPaper(@Field("judul") String judul, @Field("jenis") String jenis, @Field("penulis") String penulis, @Field("link") String link, @Field("lisensi") String lisensi, @Field("batasan_umur") String batasan_umur, @Field("deskripsi") String deskripsi, @Field("id_user") long id_user );
     @FormUrlEncoded
-    @PUT("paper")
-    Call<PostResponseModel>putPaper(@Field("id") long id, @Field("judul") String judul, @Field("jenis") String jenis, @Field("penulis") String penulis, @Field("link") String link, @Field("lisensi") String lisensi, @Field("batasan_umur") String batasan_umur, @Field("deskripsi") String deskripsi, @Field("id_user") long id_user );
+    @POST("paper/update")
+    Call<PostResponseModel>updateDataPaper(@Field("id") long id, @Field("judul") String judul, @Field("jenis") String jenis, @Field("penulis") String penulis, @Field("link") String link, @Field("lisensi") String lisensi, @Field("batasan_umur") String batasan_umur, @Field("deskripsi") String deskripsi, @Field("id_user") long id_user );
     @FormUrlEncoded
     @POST("paper/delete")
     Call<PostResponseModel>deleteDataPaper(@Field("id") long id);
+    @FormUrlEncoded
+    @POST("paper/item")
+    Call<PostResponseModel>getDatumPaper(@Field("id") long id);
 }

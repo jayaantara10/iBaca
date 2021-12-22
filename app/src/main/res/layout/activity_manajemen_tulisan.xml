@@ -271,6 +271,7 @@
                         android:max="21"/>
 
                     <LinearLayout
+                        android:id="@+id/layout_syarat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="20dp"

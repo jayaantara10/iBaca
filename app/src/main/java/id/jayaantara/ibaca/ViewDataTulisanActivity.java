@@ -15,8 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import id.jayaantara.ibaca.adapter.AdapterData;
 import id.jayaantara.ibaca.localdatabase.DBHandler;
+import id.jayaantara.ibaca.model.DataPaper;
 import id.jayaantara.ibaca.model.GetResponseModel;
 import id.jayaantara.ibaca.model.PostResponseModel;
 import id.jayaantara.ibaca.retrofit.ApiClient;
@@ -72,7 +75,7 @@ public class ViewDataTulisanActivity extends AppCompatActivity {
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                toEdit();
             }
         });
 
@@ -84,12 +87,52 @@ public class ViewDataTulisanActivity extends AppCompatActivity {
             }else if (extras.getInt("FLAG_FRAGMENT") == 1){
                 layout_btn_edt_dell.setVisibility(View.GONE);
             }
-            getDataModel();
+            getDatumPaperApi();
         }else{
             layout_btn_edt_dell.setVisibility(View.GONE);
             getDataIntent();
         }
 
+    }
+
+    private void toEdit() {
+        Intent intent = new Intent(ViewDataTulisanActivity.this, ManajemenTulisanActivity.class);
+        intent.putExtra("SELECTED_ID", id_paper);
+        startActivity(intent);
+    }
+
+    private void getDatumPaperApi(){
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        id_paper = extras.getLong("SELECTED_ID");
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<PostResponseModel> getData = apiInterface.getDatumPaper(id_paper);
+        getData.enqueue(new Callback<PostResponseModel>() {
+            @Override
+            public void onResponse(Call<PostResponseModel> call, Response<PostResponseModel> response) {
+                String msg = response.body().getMessage();
+                DataPaper paper;
+                paper = response.body().getValues();
+
+                tv_judul.setText(paper.getJudul());
+                tv_jenis.setText(paper.getJenis());
+                tv_penulis.setText(paper.getPenulis());
+                tv_tanggal.setText(paper.getCreated_at());
+                tv_umur.setText(paper.getBatasan_umur());
+                tv_deskripsi.setText(paper.getDeskripsi());
+                link = paper.getLink();
+                if(paper.getLisensi().matches("Unlicensed")){
+                    layout_lisensi.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PostResponseModel> call, Throwable t) {
+                String error_message = "Connection Status" + t.getMessage();
+                allertFail(error_message);
+            }
+        });
     }
 
     private void deletePaper() {
@@ -164,13 +207,6 @@ public class ViewDataTulisanActivity extends AppCompatActivity {
         Uri uri = Uri.parse(link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
-    }
-
-    private void getDataModel() {
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        id_paper = extras.getLong("SELECTED_ID");
-
     }
 
     private void getDataIntent() {

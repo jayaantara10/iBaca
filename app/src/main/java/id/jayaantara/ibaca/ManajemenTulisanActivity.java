@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import id.jayaantara.ibaca.model.DataPaper;
 import id.jayaantara.ibaca.model.GetResponseModel;
 import id.jayaantara.ibaca.model.PostResponseModel;
 import id.jayaantara.ibaca.retrofit.ApiClient;
@@ -40,8 +42,9 @@ import retrofit2.Response;
 
 public class ManajemenTulisanActivity extends AppCompatActivity {
     private String str_jenis, judul, jenis, penulis, link, deskripsi, batasan_umur, lisensi;
-    private long id_user;
-    private TextView tv_batasan_umur, tv_syarat;
+    private long id_user, id_paper;
+    private TextView tv_batasan_umur, tv_syarat, tv_title;
+    private LinearLayout layout_syarat;
     private EditText edt_judul, edt_penulis, edt_link, edt_deskripsi;
     private Spinner spnr_jenis;
     private RadioButton rb_licensed, rb_no_license;
@@ -55,8 +58,9 @@ public class ManajemenTulisanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manajemen_tulisan);
 
-
         getUser();
+        layout_syarat = (LinearLayout) findViewById(R.id.layout_syarat);
+        tv_title = (TextView) findViewById(R.id.tv_title);
         tv_syarat = (TextView) findViewById(R.id.tv_syarat);
         tv_batasan_umur = (TextView) findViewById(R.id.tv_batasan_umur);
         edt_judul = (EditText) findViewById(R.id.edt_judul_tulisan);
@@ -120,6 +124,48 @@ public class ManajemenTulisanActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        if(intent.hasExtra("SELECTED_ID")){
+            tv_title.setText(R.string.str_title_edit_paper);
+            layout_syarat.setVisibility(View.GONE);
+            cb_syarat.setChecked(true);
+            getDatumPaperApi();
+        }
+
+    }
+
+    private void getDatumPaperApi(){
+        Intent intent = getIntent();
+        id_paper = getIntent().getLongExtra("SELECTED_ID", 0);
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<PostResponseModel> getData = apiInterface.getDatumPaper(id_paper);
+        getData.enqueue(new Callback<PostResponseModel>() {
+            @Override
+            public void onResponse(Call<PostResponseModel> call, Response<PostResponseModel> response) {
+                String msg = response.body().getMessage();
+                DataPaper paper;
+                paper = response.body().getValues();
+
+                edt_judul.setText(paper.getJudul());
+                spnr_jenis.setSelection(((ArrayAdapter)spnr_jenis.getAdapter()).getPosition(paper.getJenis()));
+                edt_penulis.setText(paper.getPenulis());
+                sb_batasan_umur.setProgress(Integer.parseInt(paper.getBatasan_umur()));
+                edt_deskripsi.setText(paper.getDeskripsi());
+                edt_link.setText(paper.getLink());
+                if(paper.getLisensi().matches("Unlicensed")){
+                    rb_no_license.setChecked(true);
+                }else if(paper.getLisensi().matches("Licensed")){
+                    rb_licensed.setChecked(true);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<PostResponseModel> call, Throwable t) {
+                String error_message = "Connection Status" + t.getMessage();
+                allertFail(error_message);
+            }
+        });
     }
 
     private void toDashboard() {
@@ -154,8 +200,90 @@ public class ManajemenTulisanActivity extends AppCompatActivity {
         }else if(cb_syarat.isChecked() == false) {
             Toast.makeText(ManajemenTulisanActivity.this, "You must be agree with term and condition", Toast.LENGTH_SHORT).show();
         }else{
-            sendAddData();
+            Intent intent = getIntent();
+            if(intent.hasExtra("SELECTED_ID")){
+                sendUpdate();
+            }else{
+                sendAddData();
+            }
         }
+    }
+
+    private void sendUpdate() {
+        judul = edt_judul.getText().toString();
+        jenis = str_jenis;
+        penulis = edt_penulis.getText().toString();
+        link = edt_link.getText().toString();
+        deskripsi = edt_deskripsi.getText().toString();
+        batasan_umur = tv_batasan_umur.getText().toString();
+        int id_selection = rb_license_status.getCheckedRadioButtonId();
+        RadioButton selection_status = (RadioButton) findViewById(id_selection);
+        lisensi = selection_status.getText().toString();
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<PostResponseModel> updateData = apiInterface.updateDataPaper(id_paper, judul, jenis, penulis, link, lisensi, batasan_umur, deskripsi, id_user);
+        updateData.enqueue(new Callback<PostResponseModel>() {
+            @Override
+            public void onResponse(Call<PostResponseModel> call, Response<PostResponseModel> response) {
+                String msg = response.body().getMessage();
+                allertUpdateDataSuccesfully();
+
+            }
+
+            @Override
+            public void onFailure(Call<PostResponseModel> call, Throwable t) {
+                String error_message = "Connection Status" + t.getMessage();
+                allertFail(error_message);
+            }
+
+        });
+    }
+
+    private void allertUpdateDataSuccesfully() {
+        TextView tv_title_popup, tv_judul, tv_jenis, tv_penulis, tv_link, tv_status_paten, tv_batasan_umur, tv_deskripsi;
+
+        Button btn_okey;
+
+        final Dialog dialog = new Dialog(ManajemenTulisanActivity.this);
+
+        dialog.setContentView(R.layout.allert_data_tulisan_success);
+
+        tv_title_popup = (TextView) dialog.findViewById(R.id.tv_title_popup);
+        tv_title_popup.setText(R.string.str_alert_success_user2);
+
+        tv_judul = (TextView) dialog.findViewById(R.id.tv_judul);
+        tv_judul.setText(judul);
+
+        tv_jenis = (TextView) dialog.findViewById(R.id.tv_jenis);
+        tv_jenis.setText(jenis);
+
+        tv_penulis = (TextView) dialog.findViewById(R.id.tv_penulis);
+        tv_penulis.setText(penulis);
+
+        tv_link = (TextView) dialog.findViewById(R.id.tv_link );
+        tv_link .setText(link);
+
+        tv_status_paten = (TextView) dialog.findViewById(R.id.tv_status_paten);
+        tv_status_paten.setText(lisensi);
+
+        tv_batasan_umur = (TextView) dialog.findViewById(R.id.tv_batasan_umur);
+        tv_batasan_umur.setText(batasan_umur);
+
+        tv_deskripsi = (TextView) dialog.findViewById(R.id.tv_deskripsi);
+        tv_deskripsi.setText(deskripsi);
+
+
+        btn_okey = dialog.findViewById(R.id.btn_okey);
+        btn_okey.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                toDashboard();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     private void sendAddData() {
