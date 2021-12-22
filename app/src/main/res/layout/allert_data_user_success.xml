@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/stalls_data_cardview"
-    android:layout_width="wrap_content"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     app:cardCornerRadius="15dp"
@@ -48,59 +48,63 @@
 
             <LinearLayout
                 android:id="@+id/layout_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:weightSum="10">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/comic"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/comicbd"
                         android:text="@string/str_hint_data_email"
                         android:textColor="@color/black_blue"
-                        android:textSize="14sp" />
+                        android:textSize="18sp"
+                        android:layout_gravity="center"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_weight="7"
                         android:fontFamily="@font/comic"
-                        android:text="@string/str_hint_data_name"
+                        android:text="-"
                         android:textColor="@color/black_blue"
-                        android:textSize="14sp" />
+                        android:textSize="18sp"
+                        android:layout_gravity="center"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="230dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:weightSum="10">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_email"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/comic"
-                        android:text="-"
-                        android:textAlignment="textStart"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/comicbd"
+                        android:text="@string/str_hint_data_name"
                         android:textColor="@color/black_blue"
-                        android:textSize="14sp"/>
+                        android:textSize="18sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_weight="7"
                         android:fontFamily="@font/comic"
                         android:text="-"
                         android:textAlignment="textStart"

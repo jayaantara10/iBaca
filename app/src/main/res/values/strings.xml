@@ -44,7 +44,7 @@
         <item>Essay</item>
     </string-array>
     <string-array name="edit_jenis_array">
-        <item>Pilih Jenis Tulisan</item>
+        <item>Choose Tipe of Paper</item>
         <item>Journal</item>
         <item>Paper</item>
         <item>Art</item>
@@ -78,7 +78,7 @@
     <string name="str_link_title">Link Download</string>
     <string name="str_pref">*upload the file first on the drive then include the sharing link here</string>
     <string name="str_hint_data_email">Email</string>
-    <string name="str_hint_data_name">User Name</string>
+    <string name="str_hint_data_name">Name</string>
     <string name="str_hint_data_password">Password</string>
     <string name="str_hint_con_password">Confirmation Password</string>
     <string name="str_title_jenis">Type</string>

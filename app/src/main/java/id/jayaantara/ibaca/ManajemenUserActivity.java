@@ -3,6 +3,7 @@ package id.jayaantara.ibaca;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import id.jayaantara.ibaca.localdatabase.DBHandler;
+import id.jayaantara.ibaca.userapi.Http;
+import id.jayaantara.ibaca.userapi.LocalStorage;
 
 
 public class ManajemenUserActivity extends AppCompatActivity {
@@ -27,11 +31,15 @@ public class ManajemenUserActivity extends AppCompatActivity {
     private String email, name, password, password_confirmation, status_login, old_password, new_password;
     private LocalStorage localStorage;
     private Boolean CHANGE_PASS_FLAG;
+    private DBHandler dbHandler;
+    private long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manajemen_user);
+
+        dbHandler = new DBHandler(this);
 
         localStorage = new LocalStorage(ManajemenUserActivity.this);
         status_login = localStorage.getToken();
@@ -52,7 +60,7 @@ public class ManajemenUserActivity extends AppCompatActivity {
         btn_batal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ManajemenUserActivity.this, LoginActivity.class));
+                startActivity(new Intent(ManajemenUserActivity.this, DashboardActivity.class));
             }
         });
 
@@ -371,6 +379,7 @@ public class ManajemenUserActivity extends AppCompatActivity {
                         if(code == 200){
                             try{
                                 JSONObject response = new JSONObject(http.getResponse());
+                                id = response.getLong("id");
                                 name = response.getString("name");
                                 email = response.getString("email");
                                 edt_name.setText(name);

@@ -1,52 +1,64 @@
 package id.jayaantara.ibaca.fragment;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import id.jayaantara.ibaca.DashboardActivity;
 import id.jayaantara.ibaca.ManajemenTulisanActivity;
-import id.jayaantara.ibaca.ManajemenUserActivity;
 import id.jayaantara.ibaca.R;
 import id.jayaantara.ibaca.adapter.AdapterData;
 import id.jayaantara.ibaca.model.DataPaper;
-import id.jayaantara.ibaca.model.ResponseModel;
+import id.jayaantara.ibaca.model.GetResponseModel;
 import id.jayaantara.ibaca.retrofit.ApiClient;
 import id.jayaantara.ibaca.retrofit.ApiInterface;
+import id.jayaantara.ibaca.userapi.Http;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DataFragment extends Fragment {
 
+    private long id_user;
+    private String str_jenis = "All";
+    private EditText search;
+    private Spinner spnr_jenis;
     private RecyclerView rv_data;
-    private RecyclerView.Adapter adapter;
+    private AdapterData adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<DataPaper> listPaper;
-    private AlertDialog.Builder dialog;
-
+    private SwipeRefreshLayout swl_data;
+    private ProgressBar pb_data;
     private FloatingActionButton btn_tambah;
     private View root;
+    private static int FLAG_FRAGMENT = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,12 +66,60 @@ public class DataFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_data, container, false);
 
-        listPaper = new ArrayList<>();
-        rv_data = root.findViewById(R.id.rv_data);
-        layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL, false);
-        rv_data.setLayoutManager(layoutManager);
+        getUser();
 
-        retrieveData();
+        listPaper = new ArrayList<>();
+
+        rv_data = root.findViewById(R.id.rv_data);
+        swl_data = root.findViewById(R.id.swl_data);
+        pb_data = root.findViewById(R.id.pb_data);;
+
+        spnr_jenis = (Spinner) root.findViewById(R.id.spnr_jenis);
+        spnr_jenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                str_jenis= adapterView.getItemAtPosition(i).toString();
+                retrieveData();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.jenis_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnr_jenis.setAdapter(adapter);
+        swl_data.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swl_data.setRefreshing(true);
+                retrieveData();
+                swl_data.setRefreshing(false);
+            }
+        });
+
+        search = (EditText) root.findViewById(R.id.edt_search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterSerach(s.toString());
+            }
+        });
+
+
         btn_tambah = root.findViewById(R.id.btn_tambah);
         btn_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,63 +127,111 @@ public class DataFragment extends Fragment {
                 toAddData();
             }
         });
-
         return root;
     }
 
-    public void retrieveData(){
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponseModel> getData = apiInterface.getDataPaper();
-        getData.enqueue(new Callback<ResponseModel>() {
-            @Override
-            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                String msg = response.body().getMessage();
-                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                listPaper = response.body().getValues();
+    private void toAddData() {
+        Intent intent = new Intent(getActivity(), ManajemenTulisanActivity.class);
+        startActivity(intent);
+    }
 
+    public void retrieveData() {
+        pb_data.setVisibility(View.VISIBLE);
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<GetResponseModel> getData = apiInterface.getDataPaper();
+        getData.enqueue(new Callback<GetResponseModel>() {
+            @Override
+            public void onResponse(Call<GetResponseModel> call, Response<GetResponseModel> response) {
+                String msg = response.body().getMessage();
+                listPaper = response.body().getValues();
+                rv_data.setLayoutManager(new LinearLayoutManager(getActivity()));
+                filterByIdUser();
+                if(str_jenis.matches("All") == false){
+                    filterJenis(str_jenis);
+                }
+                adapter = new AdapterData(getActivity(), listPaper, FLAG_FRAGMENT);
+                rv_data.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                pb_data.setVisibility(View.INVISIBLE);
 
             }
 
             @Override
-            public void onFailure(Call<ResponseModel> call, Throwable t) {
-                Toast.makeText(getActivity(), "Koneksi gagal: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<GetResponseModel> call, Throwable t) {
+                String error_message = "Connection Status" + t.getMessage();
+                allertFail(error_message);
+                pb_data.setVisibility(View.INVISIBLE);
             }
         });
     }
 
-    public void showDialog{
-        adapter = new AdapterData(getActivity(), listPaper);
-        rv_data.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    private void filterByIdUser(){
+        ArrayList<DataPaper> filteredList = new ArrayList<DataPaper>();
 
-        adapter.setDialog(new AdapterData().Dialog() {
+        for (DataPaper data_paper : listPaper){
+            if(data_paper.getId_user() == id_user){
+                filteredList.add(data_paper);
+            }
+        }
+        listPaper = filteredList;
+    }
+
+    private void filterSerach(String text){
+        ArrayList<DataPaper> filteredList = new ArrayList<DataPaper>();
+
+        for (DataPaper data_paper : listPaper){
+            if(data_paper.getJudul().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(data_paper);
+            }else if(data_paper.getJenis().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(data_paper);
+            }else if(data_paper.getPenulis().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(data_paper);
+            }
+        }
+        adapter.filterList(filteredList);
+    }
+
+    private void filterJenis(String text){
+        ArrayList<DataPaper> filteredList = new ArrayList<DataPaper>();
+
+        for (DataPaper data_paper : listPaper){
+            if(data_paper.getJenis().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(data_paper);
+            }
+        }
+        listPaper= filteredList;
+    }
+
+
+    private void getUser(){
+        String url = getString(R.string.api_server)+"user";
+        new Thread(new Runnable() {
             @Override
-            public void onClick(long id) {
-                final CharSequence[] dialogItem = {"Lihat", "Edit", "Hapus"};
-                dialog = new AlertDialog.Builder(DashboardActivity.this);
-                dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
+            public void run() {
+                Http http = new Http(getActivity(), url);
+                http.setToken(true);
+                http.send();
 
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                Intent intent = new Intent(DashboardActivity.this, ViewDataSosmedActivity.class);
-                                intent.putExtra(DBHandler.row_id_sosmed, id);
-                                startActivity(intent);
-                                break;
-                            case 1:
-                                Intent intent2 = new Intent(DashboardActivity.this, ManajemenDataSosmedActivity.class);
-                                intent2.putExtra(DBHandler.row_id_sosmed, id);
-                                startActivity(intent2);
-                                break;
-                            case 2:
-                                deleteData(id);
-                                break;
+                    public void run() {
+                        Integer code = http.getStatusCode();
+                        if(code == 200){
+                            try{
+                                JSONObject response = new JSONObject(http.getResponse());
+                                id_user = response.getLong("id");
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
+                        }
+                        else{
+                            String msg_error = "ERROR: "+code;
+                            allertFail(msg_error);
                         }
                     }
                 });
             }
-        }
+        }).start();
     }
 
     private void allertFail(String msg) {
@@ -151,9 +259,9 @@ public class DataFragment extends Fragment {
     }
 
 
-    public void toAddData(){
-        Intent intent= new Intent(getContext(), ManajemenTulisanActivity.class);
-        startActivity(intent);
+    @Override
+    public void onResume() {
+        super.onResume();
+        retrieveData();
     }
-
 }

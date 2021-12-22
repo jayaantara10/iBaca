@@ -17,6 +17,9 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import id.jayaantara.ibaca.userapi.Http;
+import id.jayaantara.ibaca.userapi.LocalStorage;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText edt_email, edt_password;

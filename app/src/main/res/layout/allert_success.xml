@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/stalls_data_cardview"
-    android:layout_width="wrap_content"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
@@ -35,11 +35,11 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -48,19 +48,19 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_baseline_check_24"/>
+                    android:src="@drawable/ic_baseline_check_24" />
 
                 <TextView
                     android:id="@+id/msg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/comic"
                     android:text=""
+                    android:textAlignment="center"
                     android:textColor="@color/black_blue"
-                    android:textSize="17sp"
-                    android:textAlignment="center"/>
+                    android:textSize="17sp" />
 
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:cornerRadius="15dp"
-                android:backgroundTint="@color/ocean_blue"
+                android:backgroundTint="@color/green"
                 app:rippleColor="@color/cloud_blue"
                 app:strokeWidth="2dp"/>
         </LinearLayout>

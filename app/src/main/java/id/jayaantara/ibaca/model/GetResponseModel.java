@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ResponseModel {
+public class GetResponseModel {
     @SerializedName("message")
     private String message;
     @SerializedName("values")

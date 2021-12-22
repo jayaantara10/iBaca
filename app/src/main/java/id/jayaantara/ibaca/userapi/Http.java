@@ -1,14 +1,11 @@
-package id.jayaantara.ibaca;
+package id.jayaantara.ibaca.userapi;
 
 import android.content.Context;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 

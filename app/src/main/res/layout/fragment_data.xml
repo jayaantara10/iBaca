@@ -38,7 +38,6 @@
                     android:fontFamily="@font/comic"
                     android:hint="@string/str_hint_search2"
                     android:inputType="textShortMessage"
-                    android:selectAllOnFocus="true"
                     android:textColor="@color/black_blue"
                     android:textColorHint="@color/gray"
                     android:textSize="14sp" />
@@ -126,16 +125,29 @@
                 app:tint="@color/white"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_data"
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swl_data"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="15dp"
-                tools:listitem="@layout/card_data">
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="15dp"
+                    tools:listitem="@layout/card_data">
 
 
-            </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+
+            <ProgressBar
+                android:id="@+id/pb_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="invisible"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

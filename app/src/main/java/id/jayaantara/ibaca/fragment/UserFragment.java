@@ -17,8 +17,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import id.jayaantara.ibaca.Http;
-import id.jayaantara.ibaca.LocalStorage;
+import id.jayaantara.ibaca.userapi.Http;
+import id.jayaantara.ibaca.userapi.LocalStorage;
 import id.jayaantara.ibaca.LoginActivity;
 import id.jayaantara.ibaca.ManajemenUserActivity;
 import id.jayaantara.ibaca.R;

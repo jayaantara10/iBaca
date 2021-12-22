@@ -7,7 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import id.jayaantara.ibaca.userapi.LocalStorage;
 
 
 public class SplashscreenActivity extends AppCompatActivity {

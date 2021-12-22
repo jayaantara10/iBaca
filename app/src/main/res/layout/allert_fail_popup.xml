@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/stalls_data_cardview"
-    android:layout_width="wrap_content"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white">
 
@@ -35,11 +35,11 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -59,7 +59,7 @@
                     android:fontFamily="@font/comic"
                     android:text=""
                     android:textColor="@color/black_blue"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     android:textAlignment="center"/>
 
             </LinearLayout>

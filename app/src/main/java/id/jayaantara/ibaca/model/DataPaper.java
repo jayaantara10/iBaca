@@ -26,6 +26,20 @@ public class DataPaper {
     @SerializedName("id_user")
     private long id_user;
 
+    public DataPaper(long id, String judul, String jenis, String penulis, String link, String lisensi, String batasan_umur, String deskripsi, String created_at, String update_at, long id_user) {
+        this.id = id;
+        this.judul = judul;
+        this.jenis = jenis;
+        this.penulis = penulis;
+        this.link = link;
+        this.lisensi = lisensi;
+        this.batasan_umur = batasan_umur;
+        this.deskripsi = deskripsi;
+        this.created_at = created_at;
+        this.update_at = update_at;
+        this.id_user = id_user;
+    }
+
     public long getId() {
         return id;
     }

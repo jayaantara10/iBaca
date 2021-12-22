@@ -145,7 +145,7 @@
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/comic"
                             android:hint="@string/str_hint_tanggal"
-                            android:inputType="date"
+                            android:inputType="textShortMessage"
                             android:nextFocusDown="@id/edt_deskripsi"
                             android:selectAllOnFocus="true"
                             android:textColorHint="@color/gray"
@@ -185,7 +185,7 @@
                             android:fontFamily="@font/comic"
                             android:hint="@string/str_hint_deskripsi"
                             android:inputType="textMultiLine"
-                            android:nextFocusDown="@id/rb_group_status"
+                            android:nextFocusDown="@id/rb_license_status"
                             android:selectAllOnFocus="true"
                             android:textColorHint="@color/gray"
                             android:textSize="14sp" />
@@ -204,10 +204,10 @@
                     <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rb_group_status"
+                        android:id="@+id/rb_license_status"
                         android:orientation="horizontal">
                         <androidx.appcompat.widget.AppCompatRadioButton
-                            android:id="@+id/rb_ada"
+                            android:id="@+id/rb_licensed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/ocean_blue"
@@ -217,7 +217,7 @@
                             android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatRadioButton
-                            android:id="@+id/rb_tidak"
+                            android:id="@+id/rb_unlicensed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
@@ -246,7 +246,7 @@
                             android:textSize="18sp"/>
 
                         <TextView
-                            android:id="@+id/tv_datasan_umur"
+                            android:id="@+id/tv_batasan_umur"
                             android:layout_weight="2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -256,7 +256,6 @@
                             android:textColorHint="@color/ocean_blue"
                             android:textAlignment="center"
                             android:backgroundTint="@color/ocean_blue"
-                            android:inputType="numberSigned"
                             android:textColor="@color/ocean_blue"
                             android:textSize="18sp"/>
 
@@ -277,7 +276,7 @@
                         android:layout_marginVertical="20dp"
                         android:orientation="horizontal">
                         <CheckBox
-                            android:id="@+id/cb_tanda"
+                            android:id="@+id/cb_syarat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/ocean_blue" />

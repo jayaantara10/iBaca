@@ -1,6 +1,9 @@
 package id.jayaantara.ibaca.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.jayaantara.ibaca.R;
+import id.jayaantara.ibaca.ViewDataTulisanActivity;
 import id.jayaantara.ibaca.model.DataPaper;
 
 public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData>{
     private Context context;
     private List<DataPaper> listPaper;
-    private Dialog dialog;
-
-    public interface Dialog{
-        void onClick(long id);
-    }
-
-    public void setDialog(Dialog dialog){
-        this.dialog = dialog;
-    }
+    private int flag;
 
 
-    public AdapterData(Context context, List<DataPaper> listPaper) {
+    public AdapterData(Context context, List<DataPaper> listPaper, int flag) {
         this.context = context;
         this.listPaper = listPaper;
+        this.flag = flag;
     }
 
     @NonNull
@@ -47,7 +45,6 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData>{
     @Override
     public void onBindViewHolder(@NonNull @NotNull HolderData holder, int position) {
         DataPaper paper = listPaper.get(position);
-
         long id = paper.getId();
         holder.itemView.setTag(id);
         holder.tv_judul.setText(paper.getJudul());
@@ -75,12 +72,21 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    long position = (long) itemView.getTag();
-                    if(dialog!=null){
-                        dialog.onClick(position);
-                    }
+                    long id = (long) itemView.getTag();
+
+                    Bundle extras = new Bundle();
+                    extras.putLong("SELECTED_ID",id);
+                    extras.putInt("FLAG_FRAGMENT", flag);
+                    Intent intent = new Intent(context, ViewDataTulisanActivity.class);
+                    intent.putExtras(extras);
+                    context.startActivity(intent);
                 }
             });
         }
+    }
+
+    public void filterList(ArrayList<DataPaper> filteredList){
+        listPaper = filteredList;
+        notifyDataSetChanged();
     }
 }
