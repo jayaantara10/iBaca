@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IBaca"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ViewDataTulisanBackupActivity"></activity>
+        <activity android:name=".BackupActivity" />
         <activity
             android:name=".SplashscreenActivity"
             android:exported="true">
@@ -26,7 +28,7 @@
         <activity android:name=".ManajemenTulisanActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".OnBoardingActivity"></activity>
+        <activity android:name=".OnBoardingActivity" />
     </application>
 
 </manifest>

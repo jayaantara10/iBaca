@@ -130,9 +130,35 @@
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             app:cornerRadius="15dp"
-                            android:backgroundTint="@color/green"
+                            android:backgroundTint="@color/ocean_blue"
                             app:rippleColor="@color/cloud_blue"
                             app:strokeWidth="2dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/btn_backup"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="0dp"
+                            android:layout_height="55dp"
+                            android:layout_weight="2"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/comic"
+                            android:text="@string/str_list_backup"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:cornerRadius="15dp"
+                            android:backgroundTint="@color/green"
+                            app:rippleColor="@color/cloud_blue"
+                            app:strokeWidth="2dp"
+                            app:icon="@drawable/ic_baseline_backup_24"
+                            app:iconGravity="textStart"
+                            app:iconTint="@color/white"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -17,6 +17,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import id.jayaantara.ibaca.BackupActivity;
+import id.jayaantara.ibaca.ViewDataTulisanBackupActivity;
 import id.jayaantara.ibaca.userapi.Http;
 import id.jayaantara.ibaca.userapi.LocalStorage;
 import id.jayaantara.ibaca.LoginActivity;
@@ -28,7 +30,7 @@ import id.jayaantara.ibaca.R;
 public class UserFragment extends Fragment {
 
 
-    private Button btn_edit, btn_hapus, btn_logout, btn_change_password;
+    private Button btn_edit, btn_hapus, btn_logout, btn_change_password, btn_list_backup;
     private TextView tv_email, tv_name;
     private String name, email, password;
     private View root;
@@ -73,6 +75,14 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 allertConfirmationLogout();
+            }
+        });
+
+        btn_list_backup = root.findViewById(R.id.btn_backup);
+        btn_list_backup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toBackupList();
             }
         });
         
@@ -297,6 +307,11 @@ public class UserFragment extends Fragment {
     }
     public void toEdit(){
         Intent intent = new Intent(getContext(), ManajemenUserActivity.class);
+        startActivity(intent);
+    }
+
+    public void toBackupList(){
+        Intent intent = new Intent(getContext(), BackupActivity.class);
         startActivity(intent);
     }
 }

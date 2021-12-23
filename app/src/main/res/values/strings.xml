@@ -99,5 +99,8 @@
     <string name="str_success_response">"Your action has been excuted."</string>
     <string name="str_logout">Logout</string>
     <string name="str_logout_response">"You want to log out"</string>
-    <string name="str_title_edit_paper">"Edit Paper"</string>
+    <string name="str_title_edit_paper">Edit Paper</string>
+    <string name="str_title_backup">Backup</string>
+    <string name="str_list_backup">List Backup</string>
+    <string name="str_alert_success_backup">Backup Data Successfully</string>
 </resources>
