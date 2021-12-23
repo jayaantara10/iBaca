@@ -66,8 +66,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.delete(table_paper, row_id_paper + "=" + id, null);
     }
 
-    public Cursor getAllDataPaper(){
-        return db.query(table_paper,null,null,null,null, null,null);
+    public Cursor getDataPaperByidUser(long id){
+        return db.rawQuery("SELECT*FROM " + table_paper+ " WHERE " + row_id_user + "=" + id, null);
     }
 
     public Cursor getDataPaper(long id){

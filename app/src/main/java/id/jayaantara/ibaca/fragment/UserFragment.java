@@ -33,6 +33,7 @@ public class UserFragment extends Fragment {
     private Button btn_edit, btn_hapus, btn_logout, btn_change_password, btn_list_backup;
     private TextView tv_email, tv_name;
     private String name, email, password;
+    private long id_user;
     private View root;
 
     @Override
@@ -226,6 +227,7 @@ public class UserFragment extends Fragment {
                                 JSONObject response = new JSONObject(http.getResponse());
                                 name = response.getString("name");
                                 email = response.getString("email");
+                                id_user = response.getLong("id");
                                 tv_name.setText(name);
                                 tv_email.setText(email);
                             }catch (JSONException e){
@@ -311,7 +313,11 @@ public class UserFragment extends Fragment {
     }
 
     public void toBackupList(){
-        Intent intent = new Intent(getContext(), BackupActivity.class);
+
+        Bundle extras = new Bundle();
+        extras.putLong("SELECTED_ID",id_user);
+        Intent intent = new Intent(getActivity(), BackupActivity.class);
+        intent.putExtras(extras);
         startActivity(intent);
     }
 }
