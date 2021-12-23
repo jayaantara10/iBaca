@@ -24,7 +24,7 @@ public class ViewDataTulisanBackupActivity extends AppCompatActivity {
     private TextView tv_judul, tv_jenis, tv_penulis, tv_tanggal, tv_umur, tv_deskripsi, tv_link;
     private String judul, jenis, penulis, link, tanggal, umur, deskripsi, lisensi;
     private Button btn_hapus;
-    private long id_paper;
+    private long id_paper, id_user;
     private DBHandler dbHandler;
 
     @Override
@@ -114,7 +114,10 @@ public class ViewDataTulisanBackupActivity extends AppCompatActivity {
         btn_okey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putLong("SELECTED_ID",id_user);
                 Intent intent = new Intent(ViewDataTulisanBackupActivity.this, BackupActivity.class);
+                intent.putExtras(extras);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -136,6 +139,7 @@ public class ViewDataTulisanBackupActivity extends AppCompatActivity {
             umur = cursor.getString((Integer) cursor.getColumnIndex(DBHandler.row_batasan_umur));
             deskripsi = cursor.getString((Integer) cursor.getColumnIndex(DBHandler.row_deskripsi));
             tanggal = cursor.getString((Integer) cursor.getColumnIndex(DBHandler.row_tanggal));
+            id_user = cursor.getLong((Integer) cursor.getColumnIndex(DBHandler.row_id_user));
 
 
             tv_judul.setText(judul);

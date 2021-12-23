@@ -30,6 +30,4 @@ public class LocalStorage {
         sharedPreferences = context.getSharedPreferences("STORAGE_LOGIN_API", Context.MODE_PRIVATE);
         sharedPreferences.edit().clear().commit();
     }
-
-
 }
